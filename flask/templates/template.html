@@ -5,28 +5,32 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='http://normalize-css.googlecode.com/svn/trunk/normalize.css')}}">
   </head>
-  <header>
-    <nav>
-      <ul>
-        <a href="/" ><li>Home</li></a>
-        <a href="/store"><li>Store</li></a>
-        <a href="/aboutUs"><li>About Us</li></a>
-        {% if not session.logged_in %}
-        <a href="/log"><li>Login</li></a>
-        {% else %}
-        <a href="/myAccount"><li>My Account</li></a>
-        <a href="/logout"><li>Logout</li></a>
-        {% endif %}
-      <ul>
-    </nav>
-  </header>
-  <body>
-    
-    <div class="container">
-      {% block content %}
-      {% endblock %}
-    </div>
-  </body>
+  <div id="container">
+    <div id="topwrapper"></div>
+    <div id="mainwrapper">
+    <header>
+      <div id="logo"><a href="/"><img src="{{ url_for('static', filename='img/logo.png') }}" title="DHS Souvenir Store" alt="DHS Souvenir Store" /></a></div>
+      <nav>
+        <ul>
+          <li><a href="/" >Home</a></li>
+          <li><a href="/store">Store</a></li>
+          <li><a href="/aboutUs">About Us</a></li>
+          {% if not session.logged_in %}
+          <li><a href="/log">Login</a></li>
+          {% else %}
+          <li><a href="/myAccount">My Account</a></li>
+          <li><a href="/logout">Logout</a></li>
+          {% endif %}
+        <ul>
+      </nav>
+    </header>
+    <body>
+        {% block content %}
+        {% endblock %}
+    </body>
+    </div><!-- mainwrapper-->
+    <div id="bottomwrapper"></div>
+  </div><!--container-->
   <footer>
     <p>Contact: 1234 5678</p>
     <p>Email: <a id="email" href= "mailto:dhssouvenir@example.com" >dhssouveneir@example.com</a></p>
