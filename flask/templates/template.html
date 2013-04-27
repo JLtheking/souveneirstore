@@ -2,14 +2,23 @@
 <html>
   <head>
     <title>DHS Souvenir Store</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width; initial-scale=1; maximum-scale=1">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
-    <link rel="stylesheet" href="{{ url_for('static', filename='http://normalize-css.googlecode.com/svn/trunk/normalize.css')}}">
+    <link rel="stylesheet" href="http://normalize-css.googlecode.com/svn/trunk/normalize.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/font-awesome.min.css')}}">
+      
   </head>
   <div id="container">
     <div id="topwrapper"></div>
     <div id="mainwrapper">
     <header>
       <div id="logo"><a href="/"><img src="{{ url_for('static', filename='img/logo.png') }}" title="DHS Souvenir Store" alt="DHS Souvenir Store" /></a></div>
+      {% if session.logged_in %}
+      <div id="welcome">You are logged in as <a href="{{ url_for('myAccount') }}">JLtheking</a></div>
+      {% else %}
+      <div id="welcome">You are not logged in.</br> You need to <a href="{{ url_for('log') }}">login</a> or <a href="{{ url_for('log') }}">register</a> in order to track your purchases.</div>
+      {% endif %}
       <nav>
         <ul>
           <li><a href="/" >Home</a></li>
@@ -25,15 +34,34 @@
       </nav>
     </header>
     <body>
+      <div id="maincenter">
+        
+       
+        
         {% block content %}
         {% endblock %}
+      </div>
     </body>
     </div><!-- mainwrapper-->
     <div id="bottomwrapper"></div>
   </div><!--container-->
   <footer>
-    <p>Contact: 1234 5678</p>
-    <p>Email: <a id="email" href= "mailto:dhssouvenir@example.com" >dhssouveneir@example.com</a></p>
-    <p>Visit us at: 10 Tanjong Rhu Road Singapore 436895</p>
+    <div class="column">
+      <div class="header">Site Contributors</div>
+      <ul>
+        <li><a href="http://www.dhs.sg">Dunman High School</a></li>
+        <li>Y5C23'2013 Computing</li>
+        <li><a href= "mailto:leow.justin@dhs.sg">Justin Leow</a> & <a href= "mailto:dhssouvenir@example.com">Tan Di Sheng</a></li>
+      </ul>
+    </div>
+    <div class="column">
+      <div class="header">Contact Us</div>
+      <ul>
+        <li><i class="icon-mobile-phone icon-large"></i>1234 5678</li>
+        <li>&nbsp;<i class="icon-envelope"></i>&nbsp;&nbsp;<a href= "mailto:dhssouvenir@example.com" >dhssouveneir@example.com</a></li>
+        <li>&nbsp;<i class="icon-building"></i>&nbsp;&nbsp;10 Tanjong Rhu Road Singapore 436895</li>
+      </ul>
+    </div>
+    
   </footer>
 </html>

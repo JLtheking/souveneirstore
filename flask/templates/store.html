@@ -1,6 +1,9 @@
 {% extends "template.html" %}
 {% block content %}
-    <h2>Blahblahblah here are the store items</h2>
-    <br />
-    <br />
+  <div class="store">
+    <a href="{{url_for('store')}}">
+      <img src="{{url_for('static', filename='img/store/list1.jpg')}}" title="A4 lecture pad" alt="A4 lecture pad" />
+      <img src="{{url_for('static', filename='img/store/list2.jpg')}}" title="7-colour sticky note with pen" alt="7-colour sticky note with pen" />
+    </a>
+  </div>
 {% endblock %}

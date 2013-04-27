@@ -14,7 +14,7 @@ body {
 	padding: 30px;
 	background-color: #2888BF;
 	background-image: url("../img/bgs/bckgd.jpg");
-	background-repeat: repeat;
+	background-size: 100% 100%;
 }
 body, td, th, input, textarea, select, a {
 	font-size: 12px;
@@ -74,7 +74,7 @@ label {
 /* layout */
 #container {
 	margin: 20px auto;
-    width: 976px;
+  width: 976px;
 }
 #column-left {
 	float: left;
@@ -135,6 +135,16 @@ header #logo {
 	/*left: 27px;*/
 	margin-top: 25px;
 	margin-left: 27px;
+}
+
+header #welcome {
+	position: absolute;
+	bottom: 60px;
+	right: 35px;
+	z-index: 5;
+	font-size: 13px;
+	text-align: right;
+	color: #777777;
 }
 .required {
 	color: #FF0000;
@@ -223,6 +233,13 @@ nav > ul > li > div > ul > li {
 }
 nav > ul > li > div > ul > li > a {
 	color: #777777;
+}
+
+/*homepage images*/
+.home img{
+	width:45%;
+	height:45%;
+	margin: 0 0 3% 3%;
 }
 
 /*tables*/
@@ -360,42 +377,49 @@ table.radio label {
 
 
 #bottomwrapper {
-    background: url("../img/bottomwrapper.png") no-repeat scroll 0 0 transparent;
-    height: 55px;
-    margin: 0 auto;
-    width: 976px;
+	background: url("../img/bottomwrapper.png") no-repeat scroll 0 0 transparent;
+	height: 55px;
+	margin: 0 auto;
+	width: 976px;
 }
-#footer {
+footer {
 	margin: 15px auto 15px;
-    width: 960px;
-}
-#footer .column {
-	float: left !important;
-    width: 25% !important;
+  width: 960px;
+	text-decoration: none;
 	list-style: none;
-	color: #FFFFFF;
-	font-size: 15px;
-    list-style: none outside none;
+	color: #00135f;
+	display: block;
+	font-size: 12px;
 }
-#footer .column ul {
+
+footer .header {
+	font-size:20px;
+	margin-bottom: 20px;
+}
+
+footer i {
+	font-size:20px;
+	color:white;
+}
+footer .column {
+	float: left;
+  width: 35%;
+	font-size: 15px;
+}
+footer .column ul {
 	margin-top: 0px;
 	margin-left: 0px;
 	padding-left: 0px;
-	list-style: none !important;
-}
-#footer .column ul li {
-	margin-bottom: 3px;
-	color: #FFFFFF ;
-}
-#footer .column a {
-	color: #FFFFFF ;
-  	line-height: 18px;
-  	text-decoration: none;
-  	font-size: 11px;
 	list-style: none;
 }
-#footer .column a:hover {
-	color: #DDDDDD;
+footer .column ul li {
+	margin-bottom: 3px;
+}
+footer .column a {
+	text-decoration: none;
+}
+footer .column ul li a {
+	font-size: inherit;
 }
 
 #footer_bottom  {
@@ -409,12 +433,16 @@ table.radio label {
 }
 
 /* banner */
-.banner div {
-	text-align: center;
-	width: 100%;
+.banner {
+	margin-bottom: 30px;
+	width: 105%;
 }
-.banner div img {
-	margin-bottom: 20px;
+
+.banner img {
+	position:relative;
+	
+	left:-30px;
+	z-index:5;
 }
 /* header banner */
 #banner-wrapper {
