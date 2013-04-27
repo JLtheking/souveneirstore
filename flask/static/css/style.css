@@ -235,11 +235,35 @@ nav > ul > li > div > ul > li > a {
 	color: #777777;
 }
 
-/*homepage images*/
+/*images*/
 .home img{
 	width:45%;
 	height:45%;
 	margin: 0 0 3% 3%;
+	border-color:DarkBlue;
+	border-width:3px;
+	border-style: solid;
+}
+
+.home .orangeborder{
+	border-color:red;
+	border-width:3px;
+	border-style: solid;
+}
+
+.store img{
+	width:29.5%;
+	height:30%;
+	margin: 0 0 2% 2%;
+	border-color:DarkBlue;
+	border-width:3px;
+	border-style: solid;
+}
+
+.store .orangeborder{
+	border-color:red;
+	border-width:3px;
+	border-style: solid;
 }
 
 /*tables*/
