@@ -24,13 +24,13 @@ def store():
 		#g.db.close()
 		return render_template('store.html')
 
-@app.route('/aboutUs')
-def home():
-  return render_template('aboutUs.html')
-
 @app.route('/confirm')
 def confirm():
   return render_template('confirm.html')
+
+@app.route('/aboutUs')
+def aboutUs():
+  return render_template('aboutUs.html')
 
 def login_required(test):
   @wraps(test)
