@@ -1,0 +1,364 @@
+html {
+	overflow: -moz-scrollbars-vertical;
+	margin: 0;
+	padding: 0;
+}
+input:focus
+{
+  outline: none;
+}
+body {
+	color: #555555;
+	font-family: arial,verdana,tahoma,helvetica;
+	margin: 0px;
+	padding: 0px;
+    background-color: #2888BF;
+    background-image: url("../img/bgs/bckgd.jpg");
+    background-repeat: repeat;
+}
+body, td, th, input, textarea, select, a {
+	font-size: 12px;
+}
+h1, .welcome {
+	margin-top: 0px;
+	margin-bottom: 20px;
+	font-size: 22px;
+	font-weight: normal;
+	text-shadow: 0 0 1px rgba(0, 0, 0, .01);
+	color: #555555;
+}
+h2 {
+	color: #555555;
+	font-size: 16px;
+	margin-top: 0px;
+	margin-bottom: 5px;
+	font-weight: normal;
+}
+p {
+	margin-top: 0px;
+	margin-bottom: 20px;
+}
+a, a:visited,a:link, a b {
+	color: #2888BF;
+	text-decoration: none;
+	cursor: pointer;
+}
+a:hover {
+	text-decoration: none;
+	color: #555555;
+}
+a img {
+	border: none;
+}
+form {
+	padding: 0;
+	margin: 0;
+	display: inline;
+}
+input[type="text"], textarea, input[type="password"] {
+    background: none repeat scroll 0 0 #F6F6F6;
+    border: 1px solid #EAEAEA;
+    border-radius: 3px 3px 3px 3px;
+    margin-left: 0;
+    margin-right: 0;
+    padding: 3px;
+}
+select {
+	background: #F8F8F8;
+	border: 1px solid #CCCCCC;
+	padding: 2px;
+}
+label {
+	cursor: pointer;
+}
+/* layout */
+#container {
+	margin: 20px auto;
+    width: 976px;
+}
+#column-left {
+	float: left;
+	width: 241px;
+}
+#column-right {
+	float: right;
+	width: 241px;
+}
+#content {
+	margin-bottom: 25px;
+	
+	
+}
+#column-left + #column-right + #content, #column-left + #content {
+	margin-left: 262px;
+}
+#column-right + #content {
+	margin-right: 262px;
+}
+#maincenter {
+    margin: 0 auto;
+    width: 900px;
+	margin-top: 30px;
+	
+    position: relative;
+    z-index: 1;
+}
+#mainholder {
+    float: left;
+	width: 900px;
+}
+/* header */
+#topwrapper {
+    /*background: url("../image/topwrapper.png") no-repeat scroll 0 0 transparent;*/
+    height: 19px;
+    width: 976px;
+}
+#mainwrapper {
+     background: none repeat scroll 0 0 #FFFFFF;
+    margin-left: 8px;
+    overflow: hidden;
+    width: 960px;
+	
+}
+#header {
+	position: relative;
+	z-index: 99;
+	border-bottom: 2px solid #2888BF;
+    height: 90px;
+    margin: 0 auto;
+    padding-bottom: 70px;
+    width: 960px;
+}
+#header #logo {
+	position: absolute;
+	top: 25px;
+	left: 27px;
+}
+#header .links {
+	position: absolute;
+	right: 23px;
+	top: 86px;
+	font-size: 15px;
+	padding-right: 10px;
+}
+#header .links a {
+	float: left;
+	display: block;
+	padding: 0px 0px 0px 7px;
+	text-decoration: none;
+	font-size: 15px;
+}
+#header .links a + a {
+	margin-left: 15px;
+}
+.required {
+	color: #FF0000;
+	font-weight: bold;
+}
+.error {
+	display: block;
+	color: #FF0000;
+}
+.help {
+	color: #999;
+	font-size: 10px;
+	font-weight: normal;
+	font-family: Verdana, Geneva, sans-serif;
+	display: block;
+}
+
+/*tables*/
+table.form {
+	width: 100%;
+	border-collapse: collapse;
+	margin-bottom: 20px;
+}
+table.form tr td:first-child {
+	width: 150px;
+}
+table.form > * > * > td {
+	color: #000000;
+}
+table.form td {
+	padding: 4px;
+}
+input.large-field, select.large-field {
+	width: 300px;
+}
+table.list {
+	border-collapse: collapse;
+	width: 100%;
+	border-top: 1px solid #DDDDDD;
+	border-left: 1px solid #DDDDDD;
+	margin-bottom: 20px;
+}
+table.list td {
+	border-right: 1px solid #DDDDDD;
+	border-bottom: 1px solid #DDDDDD;
+}
+table.list thead td {
+	background-color: #EFEFEF;
+	padding: 0px 5px;
+}
+table.list thead td a, .list thead td {
+	text-decoration: none;
+	color: #222222;
+	font-weight: bold;
+}
+
+table.list tbody td {
+	vertical-align: top;
+	padding: 0px 5px;
+}
+table.list .left {
+	text-align: left;
+	padding: 7px;
+}
+table.list .right {
+	text-align: right;
+	padding: 7px;
+}
+table.list .center {
+	text-align: center;
+	padding: 7px;
+}
+table.radio {
+	width: 100%;
+	border-collapse: collapse;
+}
+table.radio td {
+	padding: 5px;
+	vertical-align: middle;
+}
+table.radio tr td:first-child {
+	width: 1px;
+}
+table.radio tr.highlight:hover td {
+	background: #F1FFDD;
+	cursor: pointer;
+}
+table.radio label {
+	width: 100%;
+	height: 15px;
+	display: inline-block;
+}
+
+/* content */
+.content {
+	color: #191919;
+	overflow: auto;
+	margin-bottom: 20px;
+}
+.content a {
+}
+.content p {
+	margin: 0;
+	margin-bottom: 20px;
+}
+.content .left {
+	float: left;
+	width: 49%;
+}
+.content .right {
+	float: right;
+	width: 49%;
+}
+/* orders */
+.order-list {
+	margin-bottom: 10px;
+}
+.order-list .order-id {
+	width: 49%;
+	float: left;
+	margin-bottom: 2px;
+}
+.order-list .order-status {
+	width: 49%;
+	float: right;
+	text-align: right;
+	margin-bottom: 2px;
+}
+.order-list .order-content {
+	padding: 10px 0px;
+	display: inline-block;
+	width: 100%;
+	margin-bottom: 20px;
+	border-top: 1px solid #EEEEEE;
+	border-bottom: 1px solid #EEEEEE;
+}
+.order-list .order-content div {
+	float: left;
+	width: 33.3%;
+}
+.order-list .order-info {
+	text-align: right;
+}
+.order-detail {
+	background: #EFEFEF;
+	font-weight: bold;
+}
+/* footer */
+
+
+#bottomwrapper {
+    /*background: url("../image/bottomwrapper.png") no-repeat scroll 0 0 transparent;*/
+    height: 55px;
+    margin: 0 auto;
+    width: 976px;
+}
+#footer {
+	margin: 15px auto 15px;
+    width: 960px;
+}
+#footer .column {
+	float: left !important;
+    width: 25% !important;
+	list-style: none;
+	color: #FFFFFF;
+	font-size: 15px;
+    list-style: none outside none;
+}
+#footer .column ul {
+	margin-top: 0px;
+	margin-left: 0px;
+	padding-left: 0px;
+	list-style: none !important;
+}
+#footer .column ul li {
+	margin-bottom: 3px;
+	color: #FFFFFF ;
+}
+#footer .column a {
+	color: #FFFFFF ;
+  	line-height: 18px;
+  	text-decoration: none;
+  	font-size: 11px;
+	list-style: none;
+}
+#footer .column a:hover {
+	color: #DDDDDD;
+}
+
+#footer_bottom  {
+
+    height: 62px;
+    overflow: hidden;
+    float: left;
+    width: 100%;
+
+	
+}
+
+/* banner */
+.banner div {
+	text-align: center;
+	width: 100%;
+}
+.banner div img {
+	margin-bottom: 20px;
+}
+/* header banner */
+#banner-wrapper {
+	margin-bottom: 30px;
+	width: 105%;
+}

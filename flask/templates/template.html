@@ -5,30 +5,31 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='http://normalize-css.googlecode.com/svn/trunk/normalize.css')}}">
   </head>
+  <header>
+    <nav>
+      <ul>
+        <a href="/" ><li>Home</li></a>
+        <a href="/store"><li>Store</li></a>
+        <a href="/aboutUs"><li>About Us</li></a>
+        {% if not session.logged_in %}
+        <a href="/log"><li>Login</li></a>
+        {% else %}
+        <a href="/myAccount"><li>My Account</li></a>
+        <a href="/logout"><li>Logout</li></a>
+        {% endif %}
+      <ul>
+    </nav>
+  </header>
   <body>
-    <header>
-      <nav>
-		<ul>
-		  <a href="/" ><li>Home</li></a>
-		  <a href="/store"><li>Store</li></a>
-		  <a href="/aboutUs"><li>About Us</li></a>
-		  {% if not session.logged_in %}
-		  <a href="/log"><li>Login</li></a>
-		  {% else %}
-      <a href="/myAccount"><li>My Account</li></a>
-		  <a href="/logout"><li>Logout</li></a>
-		  {% endif %}
-		<ul>
-	  </nav>
-    </header>
+    
     <div class="container">
       {% block content %}
       {% endblock %}
     </div>
   </body>
   <footer>
-	<p>Contact: 1234 5678</p>
-	<p>Email: <a id="email" href= "mailto:dhssouvenirexample@example.com" >Souvenir email</a></p>
-	<p>Address: 10 Tanjong Rhu Road Singapore 436895</p>
+    <p>Contact: 1234 5678</p>
+    <p>Email: <a id="email" href= "mailto:dhssouvenir@example.com" >dhssouveneir@example.com</a></p>
+    <p>Visit us at: 10 Tanjong Rhu Road Singapore 436895</p>
   </footer>
 </html>

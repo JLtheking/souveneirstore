@@ -10,7 +10,7 @@ app = Flask(__name__)
 # def connect_db():
     # return sqlite3.connect(app.config['DATABASE'])
 
-app.secret_key = 'S9621257G'
+app.secret_key = 'bleepbloopilikeponies'
 
 @app.route('/')
 def home():
@@ -23,6 +23,10 @@ def store():
 		#sales = [dict(rep_name=row[0], amount=row[1]) for row in cur.fetchall()]
 		#g.db.close()
 		return render_template('store.html')
+
+@app.route('/aboutUs')
+def home():
+  return render_template('aboutUs.html')
 
 @app.route('/confirm')
 def confirm():
@@ -57,7 +61,7 @@ def log():
 			error = 'Invalid Credentials. Please try again.'
 		else:
 			session['logged_in'] = True
-			return redirect(url_for('store'))
+			return redirect(url_for('myAccount'))
 	return render_template('log.html', error = error)
 
 if __name__ == '__main__':
