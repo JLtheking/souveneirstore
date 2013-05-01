@@ -6,11 +6,22 @@
   
   <div class="home">
     <a href="{{url_for('store')}}">
-      <img src="{{url_for('static', filename='img/featured/feat1.jpg')}}" title="A4 Ring File" alt="A4 Ring File" />
-      <img src="{{url_for('static', filename='img/featured/feat2.jpg')}}" title="7-colour sticky note with pen" alt="7-colour sticky note with pen" />
-      <img src="{{url_for('static', filename='img/featured/feat3.jpg')}}" class="orangeborder" title="7-colour sticky note with pen" alt="7-colour sticky note with pen" />
-      <img src="{{url_for('static', filename='img/featured/feat4.jpg')}}" class="orangeborder" title="7-colour sticky note with pen" alt="7-colour sticky note with pen" />
-      
+      <div class="imageContainer">
+        <img class="top" src="{{url_for('static', filename='img/featured/feat1.jpg')}}"/>
+        <img class="bottom" src="{{url_for('static', filename='img/store/list7.jpg')}}"/>
+      </div>
+      <div class="imageContainer">
+        <img class="top" src="{{url_for('static', filename='img/featured/feat2.jpg')}}"/>
+        <img class="bottom" src="{{url_for('static', filename='img/store/list8.jpg')}}"/>
+      </div>
+      <div class="imageContainer redBorder">
+        <img class="top" src="{{url_for('static', filename='img/featured/feat3.jpg')}}"/>
+        <img class="bottom" src="{{url_for('static', filename='img/store/list10.jpg')}}"/>
+      </div>
+      <div class="imageContainer redBorder">
+        <img class="top" src="{{url_for('static', filename='img/featured/feat4.jpg')}}"/>
+        <img class="bottom" src="{{url_for('static', filename='img/store/list11.jpg')}}"/>
+      </div>
     </a>
   </div>
   

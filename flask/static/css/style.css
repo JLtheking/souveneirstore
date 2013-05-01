@@ -235,35 +235,146 @@ nav > ul > li > div > ul > li > a {
 	color: #777777;
 }
 
-/*images*/
-.home img{
+/*HOME PAGE*/
+.home .imageContainer{
 	width:45%;
-	height:45%;
+	height:400px;
 	margin: 0 0 3% 3%;
 	border-color:DarkBlue;
 	border-width:3px;
 	border-style: solid;
+	border-radius: 25px;
+	
+	position:relative;
+	float:left;
+	overflow: hidden;
 }
 
-.home .orangeborder{
+.home .redBorder{
 	border-color:red;
 	border-width:3px;
 	border-style: solid;
 }
 
-.store img{
-	width:29.5%;
-	height:30%;
-	margin: 0 0 2% 2%;
-	border-color:DarkBlue;
+.home .imageContainer img{
+	/*width:45%;*/
+	/*height:45%;*/
+	/*margin: 0 0 3% 3%;*/
+	/*border-color:DarkBlue;*/
+	/*border-width:3px;*/
+	/*border-style: solid;*/
+	/*border-radius: 10px;*/
+	width:100%;
+	height:inherit;
+	
+	position:absolute;
+	left:0;
+	
+	
+}
+
+.home .imageContainer .bottom{
+	opacity:1;
+	-webkit-transition: opacity .2s ease-in-out;
+  -moz-transition: opacity .2s ease-in-out;
+  -o-transition: opacity .2s ease-in-out;
+  transition: opacity .2s ease-in-out;
+}
+
+.home .imageContainer .bottom:hover{
+	opacity:0;
+}
+
+/*STORE PAGE*/
+
+.store .row{
+	height:300px;
+}
+
+.store .item .orangeborder{
+	border-color:red;
 	border-width:3px;
 	border-style: solid;
 }
 
-.store .orangeborder{
-	border-color:red;
-	border-width:3px;
+.store .item {
+	border: 1px solid #ddd;
+	width: 30%;
+	height: 95%;
+	margin: 0 0 2% 3%;
+	position: relative;
+	display: block;
+	float: left;
+	border-radius: 5px;
+	padding-bottom: 15px;
+	text-align: center;
+	line-height: 20px;
+	white-space: none;
+}
+
+.store .item b{
+	font-size: 1.2em;
+}
+
+.store img {
+	height: 75%;
+	border-color: DarkBlue;
+	border-width: 3px;
 	border-style: solid;
+	border-radius: 5px;
+	margin: 5px 2px 5px 5px;
+
+	-webkit-transition: all .2s linear;
+	-moz-transition: all .2s linear;
+	-o-transition: all .2s linear;
+	-ms-transition: all .2s linear;
+	transition: all .2s linear;
+}
+
+.store .type1 img:hover {
+	height: 80%;
+
+	-webkit-box-shadow: 0 0 15px navy;
+	box-shadow: 0 0 15px navy;
+}
+
+
+.store .type2 img:hover {
+	height: 80%;
+
+	-webkit-box-shadow: 0 0 15px khaki;
+	box-shadow: 0 0 15px goldenrod;
+}
+
+/***BIG BUTTON***/
+.store #bigbutton {
+	width:500px;
+	background: #3e9cbf; /*the colour of the button*/
+	padding: 8px 14px 10px; /*apply some padding inside the button*/
+	margin-left: 200px;
+	margin-bottom: 20px;
+	border:1px solid #3e9cbf; /*required or the default border for the browser will appear*/
+	cursor:pointer; /*forces the cursor to change to a hand when the button is hovered*/
+	/*style the text*/
+	font-size:1.5em;
+	font-family:Oswald, sans-serif; /*Oswald is available from http://www.google.com/webfonts/specimen/Oswald*/
+	letter-spacing:.1em;
+	text-shadow: 0 -1px 0px rgba(0, 0, 0, 0.3); /*give the text a shadow - doesn't appear in Opera 12.02 or earlier*/
+	color: #fff;
+	/*use box-shadow to give the button some depth - see cssdemos.tupence.co.uk/box-shadow.htm#demo7 for more info on this technique*/
+	-webkit-box-shadow: inset 0px 1px 0px #3e9cbf, 0px 5px 0px 0px #205c73, 0px 10px 5px #999;
+	-moz-box-shadow: inset 0px 1px 0px #3e9cbf, 0px 5px 0px 0px #205c73, 0px 10px 5px #999;
+	box-shadow: inset 0px 1px 0px #3e9cbf, 0px 5px 0px 0px #205c73, 0px 10px 5px #999;
+	/*give the corners a small curve*/
+	-moz-border-radius: 10px;
+	-webkit-border-radius: 10px;
+	border-radius: 10px;
+}
+.store #bigbutton:hover, #bigbutton:focus {
+	color:#dfe7ea;
+	-webkit-box-shadow: inset 0px 1px 0px #3e9cbf, 0px 2px 0px 0px #205c73, 0px 2px 5px #999;
+	-moz-box-shadow: inset 0px 1px 0px #3e9cbf, 0px 2px 0px 0px #205c73, 0px 2px 5px #999;
+	box-shadow: inset 0px 1px 0px #3e9cbf, 0px 2px 0px 0px #205c73, 0px 2px 5px #999;
 }
 
 /*tables*/
