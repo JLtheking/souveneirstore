@@ -73,7 +73,7 @@ label {
 }
 /* layout */
 #container {
-	margin: 20px auto;
+	margin: 0 auto;
   width: 976px;
 }
 #column-left {
@@ -243,7 +243,7 @@ nav > ul > li > div > ul > li > a {
 	border-color:DarkBlue;
 	border-width:3px;
 	border-style: solid;
-	border-radius: 25px;
+	border-radius: 10px;
 	
 	position:relative;
 	float:left;
@@ -257,20 +257,11 @@ nav > ul > li > div > ul > li > a {
 }
 
 .home .imageContainer img{
-	/*width:45%;*/
-	/*height:45%;*/
-	/*margin: 0 0 3% 3%;*/
-	/*border-color:DarkBlue;*/
-	/*border-width:3px;*/
-	/*border-style: solid;*/
-	/*border-radius: 10px;*/
 	width:100%;
 	height:inherit;
 	
 	position:absolute;
 	left:0;
-	
-	
 }
 
 .home .imageContainer .bottom{
@@ -301,7 +292,7 @@ nav > ul > li > div > ul > li > a {
 	border: 1px solid #ddd;
 	width: 30%;
 	height: 95%;
-	margin: 0 0 2% 3%;
+	margin: 0 2% 2% 1%;
 	position: relative;
 	display: block;
 	float: left;
