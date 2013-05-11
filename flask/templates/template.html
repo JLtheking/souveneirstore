@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
     <link rel="stylesheet" href="http://normalize-css.googlecode.com/svn/trunk/normalize.css">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/font-awesome.min.css')}}">
+    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
       
   </head>
   <div id="container">
@@ -15,9 +16,9 @@
     <header>
       <div id="logo"><a href="/"><img src="{{ url_for('static', filename='img/logo.png') }}" title="DHS Souvenir Store" alt="DHS Souvenir Store" /></a></div>
       {% if session.logged_in %}
-      <div id="welcome">You are logged in as <a href="{{ url_for('myAccount') }}">JLtheking</a></div>
+      <div id="welcome">You are logged in as <a href="{{ url_for('myAccount') }}">{{session.logged_in}}</a></div>
       {% else %}
-      <div id="welcome">You are not logged in.</br> You need to <a href="{{ url_for('log') }}">login</a> or <a href="{{ url_for('log') }}">register</a> in order to track your purchases.</div>
+      <div id="welcome">You are not logged in.</br> You need to <a href="{{ url_for('log') }}">login</a> or <a href="{{ url_for('register') }}">register</a> in order to purchase from the DHS Souvenir Store.</div>
       {% endif %}
       <nav>
         <ul>
@@ -27,7 +28,7 @@
           {% if not session.logged_in %}
           <li><a href="/log">Login</a></li>
           {% else %}
-          <li><a href="/myAccount">My Account</a></li>
+          <li><a href="/myAccount">Order History</a></li>
           <li><a href="/logout">Logout</a></li>
           {% endif %}
         <ul>

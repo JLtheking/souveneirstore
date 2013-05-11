@@ -10,14 +10,12 @@ input:focus
 body {
 	color: #555555;
 	font-family: arial,verdana,tahoma,helvetica;
+	font-size:12px;
 	margin: 0px;
 	padding: 30px;
 	background-color: #2888BF;
 	background-image: url("../img/bgs/bckgd.jpg");
 	background-size: 100% 100%;
-}
-body, td, th, input, textarea, select, a {
-	font-size: 12px;
 }
 h1, .welcome {
 	margin-top: 0px;
@@ -55,7 +53,7 @@ form {
 	margin: 0;
 	display: inline;
 }
-input[type="text"], textarea, input[type="password"] {
+input[type="text"], textarea, input[type="password"], input[type="email"]{
     background: none repeat scroll 0 0 #F6F6F6;
     border: 1px solid #EAEAEA;
     border-radius: 3px 3px 3px 3px;
@@ -70,6 +68,13 @@ select {
 }
 label {
 	cursor: pointer;
+}
+
+body .flash {
+	color:red;
+	width:100%;
+	text-align: center;
+	font-size:16px;
 }
 /* layout */
 #container {
@@ -338,7 +343,7 @@ nav > ul > li > div > ul > li > a {
 }
 
 /***BIG BUTTON***/
-.store #bigbutton {
+#bigbutton {
 	width:500px;
 	background: #3e9cbf; /*the colour of the button*/
 	padding: 8px 14px 10px; /*apply some padding inside the button*/
@@ -361,88 +366,111 @@ nav > ul > li > div > ul > li > a {
 	-webkit-border-radius: 10px;
 	border-radius: 10px;
 }
-.store #bigbutton:hover, #bigbutton:focus {
+#bigbutton:hover, #bigbutton:focus {
 	color:#dfe7ea;
 	-webkit-box-shadow: inset 0px 1px 0px #3e9cbf, 0px 2px 0px 0px #205c73, 0px 2px 5px #999;
 	-moz-box-shadow: inset 0px 1px 0px #3e9cbf, 0px 2px 0px 0px #205c73, 0px 2px 5px #999;
 	box-shadow: inset 0px 1px 0px #3e9cbf, 0px 2px 0px 0px #205c73, 0px 2px 5px #999;
 }
 
-/*tables*/
-table.form {
-	width: 100%;
-	border-collapse: collapse;
-	margin-bottom: 20px;
-}
-table.form tr td:first-child {
-	width: 150px;
-}
-table.form > * > * > td {
-	color: #000000;
-}
-table.form td {
-	padding: 4px;
-}
-input.large-field, select.large-field {
-	width: 300px;
-}
-table.list {
-	border-collapse: collapse;
-	width: 100%;
-	border-top: 1px solid #DDDDDD;
-	border-left: 1px solid #DDDDDD;
-	margin-bottom: 20px;
-}
-table.list td {
-	border-right: 1px solid #DDDDDD;
-	border-bottom: 1px solid #DDDDDD;
-}
-table.list thead td {
-	background-color: #EFEFEF;
-	padding: 0px 5px;
-}
-table.list thead td a, .list thead td {
-	text-decoration: none;
-	color: #222222;
-	font-weight: bold;
+/*CONFIRM TABLE*/
+.itemTable {
+    *border-collapse: collapse; /* IE7 and lower */
+    border-spacing: 0;
+    width: 600px;
+		
+    margin: 40px auto;
+    font-family: 'trebuchet MS', 'Lucida sans', Arial;
+		font-size: 14px;
+    color: #444;
+		
+		border: solid #ccc 1px;
+    border-radius: 6px;
+    -webkit-box-shadow: 0 1px 1px #ccc; 
+    -moz-box-shadow: 0 1px 1px #ccc; 
+    box-shadow: 0 1px 1px #ccc;  
 }
 
-table.list tbody td {
-	vertical-align: top;
-	padding: 0px 5px;
+.itemTable img{
+	height: 150px;
+	border-radius: 4px;
 }
-table.list .left {
-	text-align: left;
-	padding: 7px;
+    
+.itemTable td, .itemTable th {
+    border-left: 1px solid #ccc;
+    border-top: 1px solid #ccc;
+    text-align: left;
+		padding:10px;
 }
-table.list .right {
-	text-align: right;
-	padding: 7px;
+
+.itemTable #itemImage{
+	width:150px;
 }
-table.list .center {
-	text-align: center;
-	padding: 7px;
+
+.itemTable th {
+    background-color: #dce9f9;
+    background-image: -webkit-gradient(linear, left top, left bottom, from(#ebf3fc), to(#dce9f9));
+    background-image: -webkit-linear-gradient(top, #ebf3fc, #dce9f9);
+    background-image:    -moz-linear-gradient(top, #ebf3fc, #dce9f9);
+    background-image:     -ms-linear-gradient(top, #ebf3fc, #dce9f9);
+    background-image:      -o-linear-gradient(top, #ebf3fc, #dce9f9);
+    background-image:         linear-gradient(top, #ebf3fc, #dce9f9);
+    -webkit-box-shadow: 0 1px 0 rgba(255,255,255,.8) inset; 
+    -moz-box-shadow:0 1px 0 rgba(255,255,255,.8) inset;  
+    box-shadow: 0 1px 0 rgba(255,255,255,.8) inset;        
+    border-top: none;
+    text-shadow: 0 1px 0 rgba(255,255,255,.5); 
 }
-table.radio {
-	width: 100%;
-	border-collapse: collapse;
+
+.itemTable td:first-child, .bordered th:first-child {
+    border-left: none;
 }
-table.radio td {
-	padding: 5px;
-	vertical-align: middle;
+
+.itemTable th:first-child {
+    -moz-border-radius: 6px 0 0 0;
+    -webkit-border-radius: 6px 0 0 0;
+    border-radius: 6px 0 0 0;
 }
-table.radio tr td:first-child {
-	width: 1px;
+
+.itemTable th:last-child {
+    -moz-border-radius: 0 6px 0 0;
+    -webkit-border-radius: 0 6px 0 0;
+    border-radius: 0 6px 0 0;
 }
-table.radio tr.highlight:hover td {
-	background: #F1FFDD;
-	cursor: pointer;
+
+.itemTable th:only-child{
+    -moz-border-radius: 6px 6px 0 0;
+    -webkit-border-radius: 6px 6px 0 0;
+    border-radius: 6px 6px 0 0;
 }
-table.radio label {
-	width: 100%;
-	height: 15px;
-	display: inline-block;
+
+.itemTable tr:last-child td:first-child {
+    -moz-border-radius: 0 0 0 6px;
+    -webkit-border-radius: 0 0 0 6px;
+    border-radius: 0 0 0 6px;
 }
+
+.itemTable tr:last-child td:last-child {
+    -moz-border-radius: 0 0 6px 0;
+    -webkit-border-radius: 0 0 6px 0;
+    border-radius: 0 0 6px 0;
+}
+
+.itemTable tbody tr:nth-child(even) {
+    background: #f5f5f5;
+    -webkit-box-shadow: 0 1px 0 rgba(255,255,255,.8) inset; 
+    -moz-box-shadow:0 1px 0 rgba(255,255,255,.8) inset;  
+    box-shadow: 0 1px 0 rgba(255,255,255,.8) inset;        
+}
+
+.itemTable tbody tr:hover{
+    background: #fbf8e9;
+    -o-transition: all 0.1s ease-in-out;
+    -webkit-transition: all 0.1s ease-in-out;
+    -moz-transition: all 0.1s ease-in-out;
+    -ms-transition: all 0.1s ease-in-out;
+    transition: all 0.1s ease-in-out;     
+}    
 
 /* content */
 .content {
@@ -463,41 +491,6 @@ table.radio label {
 .content .right {
 	float: right;
 	width: 49%;
-}
-
-/* orders */
-.order-list {
-	margin-bottom: 10px;
-}
-.order-list .order-id {
-	width: 49%;
-	float: left;
-	margin-bottom: 2px;
-}
-.order-list .order-status {
-	width: 49%;
-	float: right;
-	text-align: right;
-	margin-bottom: 2px;
-}
-.order-list .order-content {
-	padding: 10px 0px;
-	display: inline-block;
-	width: 100%;
-	margin-bottom: 20px;
-	border-top: 1px solid #EEEEEE;
-	border-bottom: 1px solid #EEEEEE;
-}
-.order-list .order-content div {
-	float: left;
-	width: 33.3%;
-}
-.order-list .order-info {
-	text-align: right;
-}
-.order-detail {
-	background: #EFEFEF;
-	font-weight: bold;
 }
 /* footer */
 

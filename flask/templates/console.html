@@ -4,7 +4,7 @@
     <h1>Order history</h1>
 		{% if orders %}
 			{% for o in orders %}
-				
+				<p><b>Username:</b> {{o.User_id}} </p>
 				<p><b>Order Date:</b> {{o.Order_date}}</p>
 				
 				<table class="itemTable">

@@ -1,48 +1,184 @@
 {% extends "template.html" %}
 
 {% block content %}
-	<h3>Souvenir Order Form</h3>
-	<p>Order your souvenirs here!</p>
   
-    <h2>Orders</h2>
-    <div class="datagrid">
-    <table>
-        {% for o in orders %}
-        <tr> 
-        <tr>{{ o.Order_id }}</tr><br />
-        <tr><a href="{{ url_for('delete_Order_id', Order_id = o.Order_id) }}">Delete</a> </tr>
-        <tr>{{ o.Total_price }}</tr><br />
-		<tr><a href="{{ url_for('delete_Total_price', Total_price = o.Total_price) }}">Delete</a> </tr>
-		<tr>{{ o.A4_lecture_pad }}</tr><br />
-		<tr><a href="{{ url_for('delete_A4_lecture_pad', A4_lecture_pad = o.A4_lecture_pad) }}">Delete</a> </tr>
-		<tr>{{ o.Seven_colour_sticky_note_with_pen }}</tr><br />
-		<tr><a href="{{ url_for('delete_Seven_colour_sticky_note_with_pen', Seven_colour_sticky_note_with_pen = o.Seven_colour_sticky_note_with_pen) }}">Delete</a> </tr>
-		<tr>{{ o.A5_note_book_with_zip_bag }}</tr><br />
-		<tr><a href="{{ url_for('delete_A5_note_book_with_zip_bag', A5_note_book_with_zip_bag = o.A5_note_book_with_zip_bag) }}">Delete</a> </tr>
-		<tr>{{ o.Pencil }}</tr><br />
-		<tr><a href="{{ url_for('delete_Pencil', Pencil = o.Pencil) }}">Delete</a> </tr>
-		<tr>{{ o.Stainless_steel_tumbler }}</tr><br />
-		<tr><a href="{{ url_for('delete_Stainless_steel_tumbler', Stainless_steel_tumbler = o.Stainless_steel_tumbler) }}">Delete</a> </tr>
-		<tr>{{ o.A4_clear_holder }}</tr><br />
-		<tr><a href="{{ url_for('delete_A4_clear_holder', A4_clear_holder = o.A4_clear_holder) }}">Delete</a> </tr>
-		<tr>{{ o.A4_vanguard_file }}</tr><br />
-		<tr><a href="{{ url_for('delete_A4_vanguard_file', A4_vanguard_file = o.A4_vanguard_file) }}">Delete</a> </tr>
-		<tr>{{ o.Name_card_holder }}</tr><br />
-		<tr><a href="{{ url_for('delete_Name_card_holder', Name_card_holder = o.Name_card_holder) }}">Delete</a> </tr>
-		<tr>{{ o.Umbrella }}</tr><br />
-		<tr><a href="{{ url_for('delete_Umbrella', Umbrella = o.Umbrella) }}">Delete</a> </tr>
-		<tr>{{ o.School_badge_Junior_High}}</tr><br />
-		<tr><a href="{{ url_for('delete_School_badge_Junior_High', School_badge_Junior_High = o.School_badge_Junior_High) }}">Delete</a> </tr>
-		<tr>{{ o.School_badge_Senior_High }}</tr><br />
-		<tr><a href="{{ url_for('delete_School_badge_Senior_High', School_badge_Senior_High = o.School_badge_Senior_High) }}">Delete</a> </tr>
-		<tr>{{ o.Dunman_dolls_pair }}</tr><br />
-		<tr><a href="{{ url_for('delete_Dunman_dolls_pair', Dunman_dolls_pair = o.Dunman_dolls_pair) }}">Delete</a> </tr>
-        </tr> 
-        {% endfor %} 
-		<form action="{{ url_for('add_pd') }}" method="post">
-			<input type = "submit">
-		</form>
-	</table>
+	<h1 style="text-align: center">Review Order</h1>
+	
+	{% for message in get_flashed_messages() %}
+    <div class=flash>
+        {{ message }}
+				<br />
+				<br />
     </div>
+	{% endfor %}
+	
+	{% for o in orders%}
+	<form action="{{url_for('add_pd')}}" name="order" title="confirm" method="post" onSubmit="enableTotal();">
+		<table class="itemTable">
+			<thead>
+				<tr>
+					<th scope="col">Item</th>
+					<th scope="col" id="itemImage">Item Image</th>
+					<th scope="col">Quantity</th>
+				</tr>
+			</thead>
+			<tbody>
+				<!--{{ o.A4_lecture_pad }}-->
+				{% if o.A4_lecture_pad != 0 %}
+					<tr>
+						<td>A4 lecture pad</td>
+						<td><img src="{{url_for('static', filename='img/store/list1.jpg')}}" title="A4 lecture pad" alt="A4 lecture pad" /></td>
+						<td>
+							$2.60 <i class="icon-remove"></i>
+							<input type="number" id="list1" name="list1" min="0" max="20" value={{ o.A4_lecture_pad }} onchange="calculate()" required>
+						</td>
+					</tr>
+				{% else %}
+					<input id="list1" name="list1" value="0.00" hidden>
+				{% endif %}
+				{% if o.Seven_colour_sticky_note_with_pen != 0 %}
+					<tr>
+						<td>7-colour sticky note with pen</td>
+						<td><img src="{{url_for('static', filename='img/store/list2.jpg')}}" title="7-colour sticky note with pen" alt="7-colour sticky note with pen" /></td>	
+						<td>
+							$4.20 <i class="icon-remove"></i>
+							<input type="number" id="list2" name="list2" min="0" max="20" value={{ o.Seven_colour_sticky_note_with_pen }} onchange="calculate()" required>
+						</td>
+					</tr>
+				{% else %}
+					<input id="list2" name="list2" value="0.00" hidden>
+				{% endif %}
+				{% if o.A5_note_book_with_zip_bag != 0 %}
+					<tr>
+						<td>A5 note book with zip bag</td>
+						<td><img src="{{url_for('static', filename='img/store/list4.jpg')}}" title="A5 note book with zip bag" alt="A5 note book with zip bag" /></td>	
+						<td>
+							$4.60 <i class="icon-remove"></i>
+							<input type="number" id="list4" name="list4" min="0" max="20" value={{ o.A5_note_book_with_zip_bag }} onchange="calculate()" required>
+						</td>
+					</tr>
+				{% else %}
+					<input id="list4" name="list4" value="0.00" hidden>
+				{% endif %}
+				{% if o.Pencil != 0 %}
+					<tr>
+						<td>2B pencil </td>
+						<td><img src="{{url_for('static', filename='img/store/list5.jpg')}}" title="2B pencil " alt="2B pencil " /></td>	
+						<td>
+							$0.90 <i class="icon-remove"></i>
+							<input type="number" id="list5" name="list5" min="0" max="20" value={{ o.Pencil }} onchange="calculate()" required>
+						</td>
+					</tr>
+				{% else %}
+					<input id="list5" name="list5" value="0.00" hidden>
+				{% endif %}
+				{% if o.Stainless_steel_tumbler != 0 %}
+					<tr>
+						<td>Stainless steel tumbler </td>
+						<td><img src="{{url_for('static', filename='img/store/list6.jpg')}}" title="Stainless steel tumbler " alt="Stainless steel tumbler " /></td>	
+						<td>
+							$12.90 <i class="icon-remove"></i>
+							<input type="number" id="list6" name="list6" min="0" max="20" value={{ o.Stainless_steel_tumbler }} onchange="calculate()" required>
+						</td>
+					</tr>
+				{% else %}
+					<input id="list6" name="list6" value="0.00" hidden>
+				{% endif %}
+				{% if o.A4_clear_holder != 0 %}
+					<tr>
+						<td>A4 clear holder </td>
+						<td><img src="{{url_for('static', filename='img/store/list7.jpg')}}" title="A4 clear holder " alt="A4 clear holder " /></td>	
+						<td>
+							$4.40 <i class="icon-remove"></i>
+							<input type="number" id="list7" name="list7" min="0" max="20" value={{ o.A4_clear_holder }} onchange="calculate()" required>
+						</td>
+					</tr>
+				{% else %}
+					<input id="list7" name="list7" value="0.00" hidden>
+				{% endif %}
+				{% if o.A4_vanguard_file != 0 %}
+					<tr>
+						<td>A4 vanguard file</td>
+						<td><img src="{{url_for('static', filename='img/store/list8.jpg')}}" title="A4 vanguard file" alt="A4 vanguard file" /></td>	
+						<td>
+							$1.00 <i class="icon-remove"></i>
+							<input type="number" id="list8" name="list8" min="0" max="20" value={{ o.A4_vanguard_file }} onchange="calculate()" required>
+						</td>
+					</tr>
+				{% else %}
+					<input id="list8" name="list8" value="0.00" hidden>
+				{% endif %}
+				{% if o.Name_card_holder != 0 %}
+					<tr>
+						<td>Name card holder</td>
+						<td><img src="{{url_for('static', filename='img/store/list9.jpg')}}" title="Name card holder" alt="Name card holder" /></td>	
+						<td>
+							$10.90 <i class="icon-remove"></i>
+							<input type="number" id="list9" name="list9" min="0" max="20" value={{ o.Name_card_holder }} onchange="calculate()" required>
+						</td>
+					</tr>
+				{% else %}
+					<input id="list9" name="list9" value="0.00" hidden>
+				{% endif %}
+				{% if o.Umbrella != 0 %}
+					<tr>
+						<td>Umbrella</td>
+						<td><img src="{{url_for('static', filename='img/store/list10.jpg')}}" title="Umbrella" alt="Umbrella" /></td>	
+						<td>
+							$9.00 <i class="icon-remove"></i>
+							<input type="number" id="list10" name="list10" min="0" max="20" value={{ o.Umbrella }} onchange="calculate()" required>
+						</td>
+					</tr>
+				{% else %}
+					<input id="list10" name="list10" value="0.00" hidden>
+				{% endif %}
+				{% if o.School_badge_Junior_High != 0 %}
+					<tr>
+						<td>School badge (Junior High)</td>
+						<td><img src="{{url_for('static', filename='img/store/list11.jpg')}}" class="orangeborder" title="School badge (Junior High)" alt="School badge (Junior High)" /></td>	
+						<td>
+							$1.30 <i class="icon-remove"></i>
+							<input type="number" id="list11" name="list11" min="0" max="20" value={{ o.School_badge_Junior_High}} onchange="calculate()" required>
+						</td>
+					</tr>
+				{% else %}
+					<input id="list11" name="list11" value="0.00" hidden>
+				{% endif %}
+				{% if o.School_badge_Senior_High != 0 %}
+					<tr>
+						<td>School badge (Senior High)</td>
+						<td><img src="{{url_for('static', filename='img/store/list12.jpg')}}" class="orangeborder" title="School badge (Senior High)" alt="School badge (Senior High)" /></td>	
+						<td>
+							$1.80 <i class="icon-remove"></i>
+							<input type="number" id="list12" name="list12" min="0" max="20" value={{ o.School_badge_Senior_High }} onchange="calculate()" required>
+						</td>
+					</tr>
+				{% else %}
+					<input id="list12" name="list12" value="0.00" hidden>
+				{% endif %}
+				{% if o.Dunman_dolls_pair != 0 %}
+					<tr>
+						<td>Dunman dolls (pair)</td>
+						<td><img src="{{url_for('static', filename='img/store/list13.jpg')}}" class="orangeborder" title="Dunman dolls (pair)" alt="Dunman dolls (pair)" /></td>	
+						<td>
+							$45.00 <i class="icon-remove"></i>
+							<input type="number" id="list13" name="list13" min="0" max="20" value={{ o.Dunman_dolls_pair }} onchange="calculate()" required>
+						</td>
+					</tr>
+				{% else %}
+					<input id="list13" name="list13" value="0.00" hidden>
+				{% endif %}
+				
+				
+			</tbody>
+		</table>
+			
+			<label class="itemname" for="total">Total Price:</label>
+			<input type="text" id="total" value={{ o.Total_price }} name="total" disabled required><br />
+			
+			<input type="submit" value="submit" id="bigbutton">
+	</form>
+
+	{% endfor %} 
 
 {% endblock %}
