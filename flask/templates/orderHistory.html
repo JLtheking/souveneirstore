@@ -1,0 +1,176 @@
+{% extends "template.html" %}
+{% block content %}
+	
+    <h1>Order history</h1>
+		{% if orders %}
+			{% for o in orders %}
+				
+				<p><b>Order Date:</b> {{o.Order_date}}</p>
+				
+				<table class="itemTable">
+				<thead>
+					<tr>
+						<th scope="col">Item</th>
+						<th scope="col">Quantity</th>
+					</tr>
+				</thead>
+				<tbody>
+					{% if o.A4_lecture_pad != 0 %}
+						<tr>
+							<td>A4 lecture pad</td>
+							<td>
+								$2.60 <i class="icon-remove"></i>
+								{{ o.A4_lecture_pad }}
+							</td>
+						</tr>
+					{% else %}
+						<input id="list1" name="list1" value="0.00" hidden>
+					{% endif %}
+					{% if o.Seven_colour_sticky_note_with_pen != 0 %}
+						<tr>
+							<td>7-colour sticky note with pen</td>
+							<td>
+								$4.20 <i class="icon-remove"></i>
+								{{ o.Seven_colour_sticky_note_with_pen }}
+							</td>
+						</tr>
+					{% else %}
+						<input id="list2" name="list2" value="0.00" hidden>
+					{% endif %}
+					{% if o.A5_note_book_with_zip_bag != 0 %}
+						<tr>
+							<td>A5 note book with zip bag</td>
+							<td>
+								$4.60 <i class="icon-remove"></i>
+								{{ o.A5_note_book_with_zip_bag }}
+							</td>
+						</tr>
+					{% else %}
+						<input id="list4" name="list4" value="0.00" hidden>
+					{% endif %}
+					{% if o.Pencil != 0 %}
+						<tr>
+							<td>2B pencil </td>
+							<td>
+								$0.90 <i class="icon-remove"></i>
+								{{ o.Pencil }}
+							</td>
+						</tr>
+					{% else %}
+						<input id="list5" name="list5" value="0.00" hidden>
+					{% endif %}
+					{% if o.Stainless_steel_tumbler != 0 %}
+						<tr>
+							<td>Stainless steel tumbler </td>
+							<td>
+								$12.90 <i class="icon-remove"></i>
+								{{ o.Stainless_steel_tumbler }}
+							</td>
+						</tr>
+					{% else %}
+						<input id="list6" name="list6" value="0.00" hidden>
+					{% endif %}
+					{% if o.A4_clear_holder != 0 %}
+						<tr>
+							<td>A4 clear holder </td>
+							<td>
+								$4.40 <i class="icon-remove"></i>
+								{{ o.A4_clear_holder }}
+							</td>
+						</tr>
+					{% else %}
+						<input id="list7" name="list7" value="0.00" hidden>
+					{% endif %}
+					{% if o.A4_vanguard_file != 0 %}
+						<tr>
+							<td>A4 vanguard file</td>
+							<td>
+								$1.00 <i class="icon-remove"></i>
+								{{ o.A4_vanguard_file }}
+							</td>
+						</tr>
+					{% else %}
+						<input id="list8" name="list8" value="0.00" hidden>
+					{% endif %}
+					{% if o.Name_card_holder != 0 %}
+						<tr>
+							<td>Name card holder</td>
+							<td>
+								$10.90 <i class="icon-remove"></i>
+								{{ o.Name_card_holder }}
+							</td>
+						</tr>
+					{% else %}
+						<input id="list9" name="list9" value="0.00" hidden>
+					{% endif %}
+					{% if o.Umbrella != 0 %}
+						<tr>
+							<td>Umbrella</td>
+							<td>
+								$9.00 <i class="icon-remove"></i>
+								{{ o.Umbrella }}
+							</td>
+						</tr>
+					{% else %}
+						<input id="list10" name="list10" value="0.00" hidden>
+					{% endif %}
+					{% if o.School_badge_Junior_High != 0 %}
+						<tr>
+							<td>School badge (Junior High)</td>
+							<td>
+								$1.30 <i class="icon-remove"></i>
+								{{ o.School_badge_Junior_High}}
+							</td>
+						</tr>
+					{% else %}
+						<input id="list11" name="list11" value="0.00" hidden>
+					{% endif %}
+					{% if o.School_badge_Senior_High != 0 %}
+						<tr>
+							<td>School badge (Senior High)</td>
+							<td>
+								$1.80 <i class="icon-remove"></i>
+								{{ o.School_badge_Senior_High }}
+							</td>
+						</tr>
+					{% else %}
+						<input id="list12" name="list12" value="0.00" hidden>
+					{% endif %}
+					{% if o.Dunman_dolls_pair != 0 %}
+						<tr>
+							<td>Dunman dolls (pair)</td>
+							<td>
+								$45.00 <i class="icon-remove"></i>
+								{{ o.Dunman_dolls_pair }}
+							</td>
+						</tr>
+					{% else %}
+						<input id="list13" name="list13" value="0.00" hidden>
+					{% endif %}
+					
+					<tr>
+							<td>Total Price:</td>
+							<td >{{ o.Total_price }}</td>
+						</tr>
+				</tbody>
+			</table>
+		{% endfor %}
+		{% else %}
+			<h2>Sorry, but you have no orders yet! Go to our <a href="{{ url_for('register') }}">store page</a> to browse our merchandise!</h2>
+			<br />
+			<br />
+			<br />
+			<br />
+			<br />
+			<br />
+			<br />
+			<br />
+			<br />
+			<br />
+			<br />
+			<br />
+			<br />
+			<br />
+			
+		{% endif %}
+{% endblock %}

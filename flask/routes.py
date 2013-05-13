@@ -1,4 +1,5 @@
 from flask import *
+from flask.ext.sendmail import Mail, Message
 from functools import wraps
 import sqlite3
 import datetime
@@ -9,6 +10,8 @@ DB = 'DATABASE.db'
 
 app = Flask(__name__)
 app.config.from_object(__name__)
+
+mail = Mail(app)
 
 
 
@@ -39,7 +42,7 @@ def admin_required(test):
 
 @app.route('/')
 def home():
-    return render_template('home.html')
+		return render_template('home.html')
 
 @app.route('/store')
 @login_required
@@ -89,33 +92,10 @@ def add_pd():
 		atd.execute('INSERT INTO PD(User_id, Order_date, Total_price, A4_lecture_pad, Seven_colour_sticky_note_with_pen, A5_note_book_with_zip_bag, Pencil, Stainless_steel_tumbler, A4_clear_holder, A4_vanguard_file, Name_card_holder, Umbrella, School_badge_Junior_High, School_badge_Senior_High, Dunman_dolls_pair) VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)',[session['logged_in'],current_time.strftime("%H:%M:%S, %a %d-%b-%Y"),totalCost, request.form['list1'], request.form['list2'], request.form['list4'], request.form['list5'], request.form['list6'], request.form['list7'], request.form['list8'], request.form['list9'], request.form['list10'], request.form['list11'], request.form['list12'], request.form['list13']])
 		atd.commit()
 		atd.close()
-		flash('Your order has been confirmed')
-		return redirect(url_for('myAccount'))
-
-@app.route('/logout')
-def logout():
-	session.pop('logged_in', None)
-	flash('You were logged out')
-	return redirect(url_for('log'))
-
-@app.route('/allAccounts')
-@admin_required
-def allAccounts():
-	db = connect_db()
-	cur = db.execute("SELECT * FROM PD ORDER BY User_id ASC")
-	orders = [dict(User_id = row[0], Order_date = row[1], Total_price=row[2], A4_lecture_pad=row[3], Seven_colour_sticky_note_with_pen=row[4], A5_note_book_with_zip_bag=row[5], Pencil=row[6], Stainless_steel_tumbler=row[7], A4_clear_holder=row[8], A4_vanguard_file=row[9], Name_card_holder=row[10], Umbrella=row[11], School_badge_Junior_High=row[12], School_badge_Senior_High=row[13], Dunman_dolls_pair=row[14]) for row in cur.fetchall()]
-	
-	return render_template('console.html', orders = orders)
+		flash('Your order has been submitted. Please wait for us to process the order, and we will contact you through SMS to confirm your purchase and inform you after your order is available for collection.')
+		return redirect(url_for('orderHistory'))
 
 
-@app.route('/myAccount')
-@login_required
-def myAccount():
-	db = connect_db()
-	cur = db.execute("SELECT * FROM PD WHERE User_id=(?)",[session['logged_in']])
-	orders = [dict(Order_date = row[1], Total_price=row[2], A4_lecture_pad=row[3], Seven_colour_sticky_note_with_pen=row[4], A5_note_book_with_zip_bag=row[5], Pencil=row[6], Stainless_steel_tumbler=row[7], A4_clear_holder=row[8], A4_vanguard_file=row[9], Name_card_holder=row[10], Umbrella=row[11], School_badge_Junior_High=row[12], School_badge_Senior_High=row[13], Dunman_dolls_pair=row[14]) for row in cur.fetchall()]
-	
-	return render_template('myAccount.html', orders = orders)
 
 @app.route('/log', methods=['GET', 'POST'])
 def log():
@@ -126,7 +106,7 @@ def log():
 		if username == "admin" and password == "pony":
 			session['logged_in'] = username
 			flash('You are now logged in into the administrator account')
-			return redirect(url_for('myAccount'))
+			return redirect(url_for('allAccounts'))
 		db = connect_db()
 		cur = db.execute('SELECT Username, Password FROM ACCOUNTS')
 		users = cur.fetchall()
@@ -137,8 +117,8 @@ def log():
 					break
 				else:
 					session['logged_in'] = username
-					flash('You were logged in')
-					return redirect(url_for('myAccount'))
+					flash('You were logged in')					
+					return redirect(url_for('orderHistory'))
 		else:
 				error = "The username you entered does not exist."
 	return render_template('log.html', error = error)
@@ -147,22 +127,138 @@ def log():
 def register():
 	error = None
 	if request.method == 'POST':
-		db = connect_db()
-		cur = db.execute('SELECT Username, Password FROM ACCOUNTS')
-		email = request.form['username']
-		emails = cur.fetchall()
-		for e in emails:
-			if e[0]==email:
-				error = 'Email currently in use'
-				break
+		password = request.form['password']
+		confirmPassword = request.form['confirmPassword']
+				
+		if password != confirmPassword:
+				error = "Passwords do not match"
 		else:
-				db.execute('INSERT INTO ACCOUNTS (Username, Password) values (?, ?)',
-										[request.form['username'], request.form['password']])
-				db.commit()
-				flash('Successfully registered')
-				session['logged_in'] = email
-				return redirect(url_for('store'))
+				db = connect_db()
+				cur = db.execute('SELECT * FROM ACCOUNTS')
+				username = request.form['username']
+				usernames = cur.fetchall()
+				for u in usernames:
+					if u[0]==username:
+						error = 'Username currently in use'
+						break
+				else:
+						email = request.form['email']
+						mobile_number = request.form['mobile_number']
+						
+						db.execute('INSERT INTO ACCOUNTS (Username, Password, Email, Mobile_number) VALUES (?, ?, ?, ?)',
+												[username, password, email, mobile_number])
+						db.commit()
+						flash('Successfully registered')
+						session['logged_in'] = username
+						
+						##mail user
+						##for some reason could not get mail function to work from pythonanywhere. Using manual "phone SMS confirmation fallback idea"
+						#msg = Message("DHS Souveneir Store - Registration Successful",
+						#							sender = "leow.justin@dhs.sg",
+						#							recipients = [username],
+						#							html = """
+						#							<h1>You have successfully registered for DHS Souveneir Store!</h1>
+						#							<p>Your username is {0}</p>
+						#							<p>Your password is {1}</p>
+						#							""".format(username, password)
+						#						)
+						#mail.send(msg)
+						
+						return redirect(url_for('store'))
 	return render_template('register.html', error = error)
+
+@app.route('/logout')
+@login_required
+def logout():
+	session.pop('logged_in', None)
+	flash('You were logged out')
+	return redirect(url_for('log'))
+
+@app.route('/myAccount')
+@login_required
+def myAccount():
+	db = connect_db()
+	cur = db.execute("SELECT * FROM ACCOUNTS WHERE Username=(?)",[session['logged_in']])
+	info = [dict(Username = row[0], Email = row[2], Mobile_number = row[3]) for row in cur.fetchall()]
+	
+	return render_template('myAccount.html', error = None, info = info)
+
+@app.route('/updateAccount', methods = ['POST'])
+@login_required
+def updateAccount():
+	error = None
+	
+	db = connect_db()
+	cur = db.execute("SELECT * FROM ACCOUNTS WHERE Username=(?)",[session['logged_in']])
+	row = cur.fetchone()
+	currentUsername = row[0]
+	currentPassword = row[1]
+	currentEmail = row[2]
+	currentMobile_number = row[3]
+	
+	username = request.form['username']
+	oldPassword = request.form['oldPassword']
+	password = request.form['password']
+	confirmPassword = request.form['confirmPassword']
+	email = request.form['email']
+	mobile_number = request.form['mobile_number']
+	
+	info = [dict(Username = username, Email = email, Mobile_number = mobile_number)]
+	
+	if oldPassword != "" and password != "" and confirmPassword != "":
+		if oldPassword != currentPassword:
+				error = 'Your password does not match with the record in the database'
+		else:
+				if password != confirmPassword:
+						error = 'Your new passwords do not match'
+				else:
+						db.execute('UPDATE ACCOUNTS SET Password=(?)', [password])
+						flash('Your password has been successfully changed!')
+						
+	if currentUsername != username:
+		db.execute('UPDATE ACCOUNTS SET Username=(?)', [username])
+		flash("Your username has been successfully changed from " + currentUsername + " to " + username)
+		session['logged_in'] = username
+	if currentEmail != email:
+		db.execute('UPDATE ACCOUNTS SET Email=(?)', [email])
+		flash("Your email has been successfully changed from " + currentEmail + " to " + email)
+	if currentMobile_number != mobile_number:
+		db.execute('UPDATE ACCOUNTS SET Mobile_number=(?)', [mobile_number])
+		flash("Your mobile number has been successfully changed from " + currentMobile_number + " to " + mobile_number)
+		
+	db.commit()
+	db.close()
+	
+	return render_template('myAccount.html', error = error, info = info)
+
+@app.route('/orderHistory')
+@login_required
+def orderHistory():
+	db = connect_db()
+	cur = db.execute("SELECT * FROM PD WHERE User_id=(?)",[session['logged_in']])
+	orders = [dict(Order_date = row[1], Total_price=row[2], A4_lecture_pad=row[3], Seven_colour_sticky_note_with_pen=row[4], A5_note_book_with_zip_bag=row[5], Pencil=row[6], Stainless_steel_tumbler=row[7], A4_clear_holder=row[8], A4_vanguard_file=row[9], Name_card_holder=row[10], Umbrella=row[11], School_badge_Junior_High=row[12], School_badge_Senior_High=row[13], Dunman_dolls_pair=row[14]) for row in cur.fetchall()]
+	
+	return render_template('orderHistory.html', orders = orders)
+
+@app.route('/allAccounts')
+@admin_required
+def allAccounts():
+	db = connect_db()
+	cur = db.execute("SELECT * FROM ACCOUNTS ORDER BY Username ASC")
+	accounts = [dict(Username = row[0], Email=row[2], Mobile_number=row[3]) for row in cur.fetchall()]
+	
+	return render_template('allAccounts.html', accounts = accounts)
+
+@app.route('/allOrders')
+@admin_required
+def allOrders():
+	db = connect_db()
+	cur = db.execute("SELECT * FROM PD ORDER BY User_id ASC")
+	orders = [dict(User_id = row[0], Order_date = row[1], Total_price=row[2], A4_lecture_pad=row[3], Seven_colour_sticky_note_with_pen=row[4], A5_note_book_with_zip_bag=row[5], Pencil=row[6], Stainless_steel_tumbler=row[7], A4_clear_holder=row[8], A4_vanguard_file=row[9], Name_card_holder=row[10], Umbrella=row[11], School_badge_Junior_High=row[12], School_badge_Senior_High=row[13], Dunman_dolls_pair=row[14]) for row in cur.fetchall()]
+	
+	return render_template('allOrders.html', orders = orders)
+
+
 
 if __name__ == '__main__':
   app.run(debug=True)

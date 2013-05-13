@@ -1,14 +1,6 @@
 {% extends "template.html" %}
 {% block content %}
 	
-	{% for message in get_flashed_messages() %}
-    <div class=flash>
-        {{ message }}
-				<br />
-				<br />
-    </div>
-	{% endfor %}
-	
   <div class="store">
 		<form action="{{url_for('add_td')}}" name="order" title="confirm" method="post" onSubmit="enableTotal();">
 			

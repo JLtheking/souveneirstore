@@ -1,0 +1,33 @@
+{% extends "template.html" %}
+{% block content %}
+	
+    <h1>All Accounts</h1>
+		{% if accounts %}
+			{% for a in accounts %}
+				<h2><b>Username:</b> {{a.Username}} </h2>
+				<b>Email:</b> {{a.Email}}
+				<br />
+				<b>Mobile Number:</b> {{a.Mobile_number}}
+				<br />
+				<br />
+				<br />
+		{% endfor %}
+		{% else %}
+			<h2>No one has even signed up for an account yet :(</h2>
+			<br />
+			<br />
+			<br />
+			<br />
+			<br />
+			<br />
+			<br />
+			<br />
+			<br />
+			<br />
+			<br />
+			<br />
+			<br />
+			<br />
+			
+		{% endif %}
+{% endblock %}

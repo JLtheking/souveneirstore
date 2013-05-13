@@ -5,14 +5,23 @@
   {% if error %}<p class=error><strong>Error:</strong> {{ error }}{% endif %}
   <form action="{{ url_for('register') }}" method=post>
     <dl>
-      <dt>Email:
-      <dd><input type=email name=username required></dd>
+      <dt>Username:
+      <dd><input type=text name=username value="{{ request.form.username }}" required></dd>
+			<br />
       <dt>Password: (7 characters minimum)</dt>
-      <dd><input type=password name=password pattern=".{7,}" title="7 characters minimum" required></dd>
+      <dd><input type=password name=password pattern=".{7,}" title="7 characters minimum"></dd>
+			<dt>Confirm Password: (7 characters minimum)</dt>
+			<dd><input type=password name=confirmPassword pattern=".{7,}" title="7 characters minimum"></dd>
 			<br />
+			<dt>Email:</dt>
+			<dd><input type=email name=email value="{{ request.form.email }}" required></dd>
 			<br />
-      <input type=submit value=Register>
-    </dl>
+			<dt>Mobile Number: (8 digits)</dt>
+			<dd><input type=text name=mobile_number pattern="[0-9]{8}" title="8 characters" value="{{ request.form.mobile_number }}" required></dd>
+			<br />
+		</dl>
+		
+		<input type="submit" value="Register" id="bigbutton">
   </form>
 	
 	<br />

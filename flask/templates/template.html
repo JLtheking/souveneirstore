@@ -26,16 +26,31 @@
           <li><a href="/store">Store</a></li>
           <li><a href="/aboutUs">About Us</a></li>
           {% if not session.logged_in %}
-          <li><a href="/log">Login</a></li>
+            <li><a href="/log">Login</a></li>
           {% else %}
-          <li><a href="/myAccount">Order History</a></li>
-          <li><a href="/logout">Logout</a></li>
+            {% if session.logged_in == "admin" %}
+                <li><a href="/allAccounts">View All Account Info</a></li>
+                <li><a href="/allOrders">View All Orders</a></li>
+            {% else %}
+              <li><a href="/myAccount">Edit Account Information</a></li>
+              <li><a href="/orderHistory">Order History</a></li>
+            {% endif %}
+            <li><a href="/logout">Logout</a></li>
           {% endif %}
         <ul>
       </nav>
     </header>
     <body>
       <div id="maincenter">
+        {% for message in get_flashed_messages() %}
+          <div class=flash>
+            {{ message }}
+            <br />
+            <br />
+            <br />
+            
+          </div>
+        {% endfor %}
         {% block content %}
         {% endblock %}
       </div>

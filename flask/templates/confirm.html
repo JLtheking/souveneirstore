@@ -4,13 +4,6 @@
   
 	<h1 style="text-align: center">Review Order</h1>
 	
-	{% for message in get_flashed_messages() %}
-    <div class=flash>
-        {{ message }}
-				<br />
-				<br />
-    </div>
-	{% endfor %}
 	
 	{% for o in orders%}
 	<form action="{{url_for('add_pd')}}" name="order" title="confirm" method="post" onSubmit="enableTotal();">
