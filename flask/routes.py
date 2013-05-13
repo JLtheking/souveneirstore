@@ -54,6 +54,7 @@ def aboutUs():
     return render_template('aboutUs.html')
 
 @app.route('/add_td', methods = ['POST'])
+@login_required
 def add_td():
 	tc = request.form['total']
 	if tc == "0.00":
@@ -69,6 +70,7 @@ def add_td():
 		return redirect(url_for('confirm'))
 
 @app.route('/confirm')
+@login_required
 def confirm():
 	atd = connect_db()
 	cur = atd.execute('SELECT Total_price, A4_lecture_pad, Seven_colour_sticky_note_with_pen, A5_note_book_with_zip_bag, Pencil, Stainless_steel_tumbler, A4_clear_holder, A4_vanguard_file, Name_card_holder, Umbrella, School_badge_Junior_High, School_badge_Senior_High, Dunman_dolls_pair from TD')
@@ -78,6 +80,7 @@ def confirm():
 	return render_template('confirm.html', orders = orders)
 
 @app.route('/add_pd', methods = ['POST'])
+@login_required
 def add_pd():
 	tc = request.form['total']
 	if tc == "0.00":
