@@ -1,5 +1,5 @@
 from flask import *
-from flask.ext.sendmail import Mail, Message
+#from flask.ext.sendmail import Mail, Message
 from functools import wraps
 import sqlite3
 import datetime
